@@ -25,6 +25,17 @@ const AddProduct = () => {
 
   const handleAdd = () => {
     setPreviewProduct(product);
+
+    // Get the current products from localStorage
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+
+    // Add the new product to the products list
+    products.push(product);
+
+    // Save the updated products list back to localStorage
+    localStorage.setItem('products', JSON.stringify(products));
+
+    // Reset the form fields
     setProduct({
       title: '',
       description: '',
@@ -39,13 +50,11 @@ const AddProduct = () => {
   const cardStyle = {
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     borderRadius: '8px',
-    
   };
 
   const formControlStyle = {
     borderRadius: '5px',
     boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
-   
   };
 
   const buttonStyle = {

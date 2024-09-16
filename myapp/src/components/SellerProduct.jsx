@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import Navbar from "./Navbar";
+import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
 
 // Helper function to prepare chart data
 const getChartData = (products) => {
@@ -33,6 +34,8 @@ const SellerProduct = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();  // Initialize navigate function
+
   useEffect(() => {
     // Fetch products from Fake Store API
     fetch('https://fakestoreapi.com/products')
@@ -49,6 +52,7 @@ const SellerProduct = () => {
 
   const handleUpdate = (productId) => {
     alert(`Update product with ID: ${productId}`);
+    navigate('/edit-product')
     // Navigate to edit product page, implement as needed
   };
 
@@ -73,7 +77,10 @@ const SellerProduct = () => {
     }
   };
 
-  
+  const handleAddProduct = () => {
+    navigate('/add-product');  // Use navigate to go to the add product page
+  };
+
   if (loading) {
     return (
       <Container className="text-center my-5">
@@ -118,6 +125,9 @@ const SellerProduct = () => {
                     }}
                   />
                 </div>
+                <Button variant="success" className="mt-3" onClick={handleAddProduct}>
+                  Add Product
+                </Button>
               </Card.Body>
             </Card>
           </Col>
